@@ -1,35 +1,48 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+@import '@nuxt/ui';
+/* @import './base.css';  */
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@theme {
+  --font-relaway: 'Raleway', 'Raleway Placeholder ', Inter, sans-serif;
+
+  --color-black_text: #0000;
+  --color-main-bg: #ffffff;
+  --color-cream: #fff5eb;
+  --color-grey: #f2f2f2;
 }
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+@layer base {
+  html {
+    font-family: var(--font-relaway);
   }
-}
 
-@media (min-width: 1024px) {
   body {
-    display: flex;
-    place-items: center;
+    font-family: var(--font-relaway);
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  * {
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: 6px;
+    scrollbar-color: transparent;
+  }
+
+  ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.2);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(128, 128, 128, 0.5);
+    border-radius: 3px;
   }
 }
