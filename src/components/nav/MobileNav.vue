@@ -55,9 +55,9 @@ watch(
             <RouterLink
               :to="item.route"
               :class="[
-                'block w-full px-6 py-4  font-medium transition-colors duration-200 ease-in-out text-lg',
+                'block w-full px-6 py-4 text-lg font-medium transition-colors duration-200 ease-in-out',
                 activeLink === item.route?.name?.toString()
-                  ? 'active bg-(--ui-bg-accented) font-bold '
+                  ? 'active bg-(--ui-bg-accented) font-bold'
                   : 'text-(--ui-text-muted)',
               ]"
             >
@@ -66,10 +66,10 @@ watch(
           </li>
         </ul>
 
-        <div class="flex gap-3 p-4 justify-center items-center">
+        <div class="flex items-center justify-center gap-3 p-4">
           <RouterLink to="/login" class="w-full">
             <button
-              class="rounded-full w-full bg-black px-4 py-3 text-center font-bold text-white shadow-md transition-all duration-200 hover:border-2 hover:bg-white/20 hover:text-black"
+              class="w-full rounded-full bg-black px-4 py-3 text-center font-bold text-white shadow-md transition-all duration-200 hover:border-2 hover:bg-white/20 hover:text-black"
             >
               Login
             </button>
@@ -93,15 +93,17 @@ watch(
   font-style: normal;
   font-weight: 700;
 }
+
 .slide-down-enter-active,
 .slide-down-leave-active {
-  transition: all 0.3s ease;
-  max-height: 600px;
+  transition: all 0.4s ease;
+  max-height: 800px;
 }
 
 .slide-down-enter-from,
 .slide-down-leave-to {
   max-height: 0;
   opacity: 0;
+  transform: translateY(-20px);
 }
 </style>

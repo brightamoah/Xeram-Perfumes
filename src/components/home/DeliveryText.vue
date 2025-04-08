@@ -23,16 +23,16 @@
           :key="feature.title"
           class="flex flex-col items-center space-y-6"
         >
-          <div class="w-full max-w-md mx-auto">
+          <div class="mx-auto w-full max-w-md">
             <img
               :src="feature.image"
               :srcset="feature.srcSet"
               :alt="feature.imageAlt"
-              class="w-full h-64 object-cover rounded-2xl shadow-lg"
+              class="h-64 w-full rounded-2xl object-cover shadow-lg"
             />
           </div>
           <div class="text-center">
-            <h3 class="mt-4 mb-4 text-2xl text-center text-(--ui-text-highlighted)">
+            <h3 class="mt-4 mb-4 text-center text-2xl text-(--ui-text-highlighted)">
               {{ feature.title }}
             </h3>
             <p class="description text-base">

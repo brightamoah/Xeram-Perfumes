@@ -1,5 +1,5 @@
 <template>
-  <section class="whe-sec dark:text-white mx-auto max-w-6xl space-y-4 px-4 py-16">
+  <section class="whe-sec mx-auto max-w-6xl space-y-4 px-4 py-16 dark:text-white">
     <h2 class="title text-center text-4xl font-light">Why Choose Xeram?</h2>
 
     <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-16">
@@ -61,6 +61,7 @@ const sections = [
   margin-bottom: 3rem;
   margin-top: 2rem;
 }
+
 .whe-sec {
   font-weight: lighter;
 }

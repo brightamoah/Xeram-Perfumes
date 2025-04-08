@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-cream flex w-full justify-center py-16">
+  <div class="flex w-full justify-center bg-cream py-16">
     <div class="max-w-5xl px-4 text-center">
       <h3 class="p-2 text-3xl font-light text-black">Collection</h3>
 

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 const links = ref([
   {
-    to: '/shop',
+    to: '/shop/all-products',
     label: 'All Products',
   },
   {
@@ -33,20 +33,32 @@ const products = ref([
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center gap-8 mt-9">
+  <div class="mt-9 flex w-full flex-col items-center gap-8">
     <!-- Navigation Buttons -->
-    <nav class="nav flex max-w-full items-center justify-center p-4">
+    <!-- <nav class="nav flex max-w-full items-center justify-center p-4">
       <ul class="flex items-center justify-center gap-4 md:gap-6">
         <li v-for="link in links" :key="link.label">
           <router-link
             :to="link.to"
-            class="inline-block min-w-[120px] rounded-full border-2 px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black md:min-w-[160px] md:px-6 md:py-3 md:text-base"
+            class="inline-block min-w-[120px] rounded-full border-2 px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white md:min-w-[160px] md:px-6 md:py-3 md:text-base dark:hover:bg-white dark:hover:text-black"
           >
             {{ link.label }}
           </router-link>
         </li>
       </ul>
-    </nav>
+    </nav> -->
+
+    <div class="flex items-center justify-center space-x-2 md:space-x-8">
+      <UButton
+        v-for="link in links"
+        :key="link.label"
+        :to="link.to"
+        :label="link.label"
+        variant="link"
+        color="neutral"
+        class="inline-block min-w-[90px] rounded-full border-2 border-(--ui-border-inverted) px-3 py-3.5 text-center text-xs font-bold whitespace-nowrap text-(--ui-text-highlighted) transition-all duration-300 hover:bg-black hover:text-white md:min-w-[160px] md:px-6 md:py-3 md:text-base md:font-medium dark:hover:bg-white dark:hover:text-black"
+      />
+    </div>
 
     <!-- Product Cards - Now properly centered -->
     <div

@@ -1,10 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="w-full h-[68vh] flex flex-col items-center justify-center">
+  <div class="flex h-[68vh] w-full flex-col items-center justify-center">
     <div class="text-center">
-      <h1 class="text-6xl font-bold text-(--ui-text-highlighted) mb-4">404</h1>
-      <h2 class="text-2xl font-semibold mb-2">Oops! Page not found</h2>
+      <h1 class="mb-4 text-6xl font-bold text-(--ui-text-highlighted)">404</h1>
+      <h2 class="mb-2 text-2xl font-semibold">Oops! Page not found</h2>
       <p class="mb-6">
         The page you are looking for might have been removed, had its name changed, or is
         temporarily unavailable.

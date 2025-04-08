@@ -10,12 +10,12 @@ const currentYear = useDateFormat(useNow(), 'YYYY')
 </script>
 
 <template>
-  <footer class="flex flex-col items-center justify-center w-full p-10 space-y-4">
+  <footer class="flex w-full flex-col items-center justify-center space-y-4 p-10">
     <UButton
       label="Back to Top"
-      variant="ghost"
+      variant="subtle"
       color="neutral"
-      class="text-center cursor-pointer p-3 text-base rounded-full"
+      class="cursor-pointer rounded-full p-3 text-center text-base"
       @click="scrollToTop"
     />
 
@@ -27,10 +27,10 @@ const currentYear = useDateFormat(useNow(), 'YYYY')
       class="w-full md:w-[80%]"
     />
 
-    <div class="flex flex-col sm:flex-row justify-between w-full md:w-[80%] md:max-w-6xl">
-      <p class="text-center">© {{ currentYear }} Xeram Perfumes. All rights reserved.</p>
+    <div class="flex w-full flex-col justify-between sm:flex-row md:w-[80%] md:max-w-6xl">
+      <p class="text-center">&copy; {{ currentYear }} Xeram Perfumes. All rights reserved.</p>
 
-      <div class="flex justify-center sm:justify-start gap-4 mt-4 sm:mt-0">
+      <div class="mt-4 flex justify-center gap-4 sm:mt-0 sm:justify-start">
         <InstagramIcon class="size-5" />
         <WhatsAPP class="size-5" />
         <FaceBook class="size-5" />

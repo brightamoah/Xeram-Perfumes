@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+// import ShopView from '@/views/ShopView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,15 +29,68 @@ const router = createRouter({
       component: () => import('@/views/ReviewsView.vue'),
     },
     {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('@/views/CartView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/auth/LoginPage.vue'),
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('@/views/auth/SignupPage.vue'),
+    },
+    {
       path: '/shop',
       name: 'shop',
       component: () => import('@/views/ShopView.vue'),
+      redirect: '/shop/all-products',
+      children: [
+        {
+          path: ':id',
+          name: 'allProducts',
+          component: () => import('@/views/AllProducts.vue'),
+        },
+        {
+          path: 'details/:id/:variantId',
+          name: 'productDetails',
+          component: () => import('@/views/ProductDetails.vue'),
+          props: true,
+          children: [
+            {
+              path: '',
+              name: 'productDetailsVariant',
+              component: () => import('@/components/shop/MainDetails.vue'),
+              props: true,
+            },
+          ],
+        },
+      ],
     },
+
     {
       path: '/:catchAll(.*)',
+      name: 'not-found',
       component: () => import('@/views/404Error.vue'),
     },
   ],
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0, behavior: 'auto' }
+    }
+  },
 })
+
+// router.afterEach((to, from) => {
+//   if (to.path !== from.path) {
+//     window.scrollTo({ top: 0, behavior: 'auto' })
+//   }
+// })
 
 export default router

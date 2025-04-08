@@ -4,9 +4,14 @@ import { computed, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { onClickOutside, useColorMode } from '@vueuse/core'
 import type { MenuItems } from '@/types/types'
 import { useRouter } from 'vue-router'
+import { useProductStore } from '@/stores/ProductStore'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const mode = useColorMode()
+const productStore = useProductStore()
+const { cartItemsCount } = storeToRefs(productStore)
+
 const menuItems = ref<NavigationMenuItem[]>([
   { label: 'Home', to: '/' },
   { label: 'Shop', to: '/shop' },
@@ -16,11 +21,11 @@ const menuItems = ref<NavigationMenuItem[]>([
 ])
 
 const mobileMenuItems = ref<MenuItems[]>([
-  { label: 'Home', to: '/', route: { name: 'home' } },
-  { label: 'Shop', to: '/shop', route: { name: 'shop' } },
-  { label: 'About', to: '/about', route: { name: 'about' } },
-  { label: 'Contact', to: '/contact', route: { name: 'contact' } },
-  { label: 'Reviews', to: '/reviews', route: { name: 'reviews' } },
+  { label: 'Home', route: { name: 'home' } },
+  { label: 'Shop', route: { name: 'shop' } },
+  { label: 'About', route: { name: 'about' } },
+  { label: 'Contact', route: { name: 'contact' } },
+  { label: 'Reviews', route: { name: 'reviews' } },
 ])
 
 const mobileMenuOpen = ref<boolean>(false)
@@ -48,10 +53,8 @@ onClickOutside(mobileNav, (event) => {
   }
 })
 
-const cartItemCount = ref<number>(10)
-
 const displayCartItemCount = computed(() => {
-  return cartItemCount.value > 99 ? '99+' : cartItemCount.value.toString()
+  return cartItemsCount.value > 99 ? '99+' : cartItemsCount.value.toString()
 })
 
 watch(
@@ -71,7 +74,7 @@ onMounted(() => {
 <template>
   <header class="sticky top-0 z-50 w-full">
     <nav
-      class="flex w-full items-center justify-between px-2 py-2 border-gray-200 transition-all duration-300 shadow-md bg-(--ui-bg) dark:bg-(--ui-bg-muted)"
+      class="flex w-full items-center justify-between border-gray-200 bg-(--ui-bg) px-2 py-2 shadow-md transition-all duration-300 dark:bg-(--ui-bg-muted)"
     >
       <MobileNav
         ref="mobileNav"
@@ -84,7 +87,7 @@ onMounted(() => {
 
       <LogoComponent />
 
-      <section class="hidden md:flex justify-center flex-grow">
+      <section class="hidden flex-grow justify-center md:flex">
         <UNavigationMenu
           :items="menuItems"
           variant="link"
@@ -92,7 +95,7 @@ onMounted(() => {
           :ui="{
             link: 'relative font-relaway text-lg transition-colors duration-300 hover:text-black dark:hover:text-white',
           }"
-          class="w-full text-lg justify-center font-relaway"
+          class="w-full justify-center font-relaway text-lg"
         />
       </section>
 
@@ -100,20 +103,17 @@ onMounted(() => {
         <div>
           <UButton
             variant="link"
-            color="neutral"
             to="/cart"
-            :class="{
-              'relative rounded-xl pr-5 cursor-pointer hover:bg-transparent': cartItemCount > 0,
-              'relative rounded-xl cursor-pointer hover:bg-transparent': cartItemCount <= 0,
-            }"
+            color="neutral"
+            class="relative cursor-pointer rounded-xl p-2 text-(--ui-text-highlighted) hover:bg-transparent"
           >
-            <UIcon name="i-lucide-shopping-cart" class="size-7 font-extrabold transition-colors" />
+            <UIcon name="i-lucide-shopping-cart" class="size-7 font-bold transition-colors" />
             <UBadge
-              v-if="cartItemCount > 0"
+              v-if="cartItemsCount > 0"
               color="neutral"
               variant="solid"
               size="sm"
-              class="absolute -top-2 right-1 rounded-full"
+              class="absolute top-0 right-0 flex h-[20px] min-w-[20px] items-center justify-center rounded-full px-1 text-xs"
               :label="displayCartItemCount"
             />
           </UButton>
@@ -122,9 +122,9 @@ onMounted(() => {
             color="neutral"
             variant="ghost"
             @click="mode = mode === 'dark' ? 'light' : 'dark'"
-            class="rounded-xl dark:hover:bg-(--ui-bg) md:hidden"
+            class="rounded-xl md:hidden dark:hover:bg-(--ui-bg)"
           >
-            <SunIcon v-if="mode === 'light'" class="size-6" />
+            <SunIcon v-if="mode === 'light'" class="size-7" />
             <MoonIcon v-else class="size-6" />
           </UButton>
         </div>
@@ -135,7 +135,7 @@ onMounted(() => {
             color="neutral"
             to="/login"
             label="Login"
-            class="rounded-full py-2 px-4 text-center font-medium font-bold shadow-md transition-all duration-200"
+            class="rounded-full px-4 py-2 text-center font-bold shadow-md transition-all duration-200"
           />
           <UButton
             color="neutral"

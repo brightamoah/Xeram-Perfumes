@@ -19,3 +19,44 @@ export interface Delivery {
   srcSet?: string
   imageAlt: string
 }
+
+export type Variant = {
+  id: number
+  size: string
+  price: number
+  image: string
+}
+
+export type Product = {
+  id: number
+  name: string
+  defaultImage: string
+  category?: string
+  description?: string
+  variant: Variant[]
+}
+
+export type Variants = {
+  variantId: number
+  size: string
+  price: number
+  image: string
+}
+
+export type NewProduct = {
+  id: number
+  name: string
+  category?: string
+  description?: string
+  variants: Variants[]
+}
+
+export type CartItem = {
+  id: number
+  productId: number
+  name: string
+  size: string
+  price: number
+  image: string
+  quantity: number
+}

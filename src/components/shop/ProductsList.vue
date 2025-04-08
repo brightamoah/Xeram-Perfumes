@@ -1,18 +1,61 @@
 <script setup lang="ts">
 import { useProductStore } from '@/stores/ProductStore'
 import type { Product } from '@/types/types'
-import { formatCurrency } from '@/utils/formatCurrency'
 import { vAutoAnimate } from '@formkit/auto-animate/vue'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 // const id = ref<number>(1)
+
+// const formatCurrency = (value: number) => {
+//   return new Intl.NumberFormat('en-GH', {
+//     style: 'currency',
+//     currency: 'GHS',
+//     minimumFractionDigits: 2,
+//   }).format(value)
+// }
 
 const productStore = useProductStore()
 
 const { products } = storeToRefs(productStore)
+
+// const products = ref<Product[]>([
+//   {
+//     id: id.value++,
+//     name: 'Club De Nuit',
+//     price: 39.99,
+//     image: '/img/perf.png',
+//     category: 'Xeram Originals',
+//   },
+//   {
+//     id: id.value++,
+//     name: 'Oud De Arabia',
+//     price: 39.99,
+//     image: '/img/perf2.png',
+//     category: 'Xeram Impressions',
+//   },
+//   {
+//     id: id.value++,
+//     name: 'Asad',
+//     price: 39.99,
+//     image: '/img/perf3.png',
+//     category: 'Xeram Originals',
+//   },
+//   {
+//     id: id.value++,
+//     name: 'Allure Homme',
+//     price: 39.99,
+//     image: '/img/perf4.png',
+//     category: 'Xeram Impressions',
+//   },
+//   {
+//     id: id.value++,
+//     name: 'Chanel No 5',
+//     price: 39.99,
+//     image: '/img/perf5.png',
+//     category: 'Xeram Impressions',
+//   },
+// ])
 
 const categories = ref<string[]>(['All Product', 'Xeram Impressions', 'Xeram Originals'])
 const selectedCategory = ref<string>('All Product')
@@ -21,14 +64,6 @@ const filteredProducts = computed<Product[]>(() => {
   if (selectedCategory.value === 'All Product') return products.value
   return products.value.filter((product) => product.category === selectedCategory.value)
 })
-
-const viewProductDetails = (product: Product, variantId: number) => {
-  console.log(product)
-  router.push({
-    name: 'productDetails',
-    params: { id: product.id, variantId: variantId },
-  })
-}
 </script>
 
 <template>
@@ -64,45 +99,41 @@ const viewProductDetails = (product: Product, variantId: number) => {
     >
       <div
         v-for="product in filteredProducts"
-        :key="product.variant[0].id"
+        :key="product.id"
         class="group relative flex flex-col"
       >
         <!-- Product Image -->
-        <div class="aspect-w-1 relative aspect-square w-full overflow-hidden rounded-lg">
+        <div
+          class="aspect-w-1 relative aspect-square w-full overflow-hidden rounded-lg"
+          @click="$router.push({ name: 'productDetails', params: { id: product.id } })"
+        >
           <img
-            :src="product.variant[0].image"
+            :src="product.defaultImage"
             :alt="product.name"
-            class="aspect-square h-full w-full cursor-pointer object-cover object-center transition-transform duration-300 group-hover:scale-105"
-            @click="viewProductDetails(product, product.variant[0].id)"
+            class="aspect-square h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
           />
           <!-- Add to Cart Button - Overlay -->
-          <!-- <div
+          <div
             class="bg-opacity-0 group-hover:bg-opacity-30 absolute inset-0 flex items-center justify-center transition-all duration-300 hover:bg-black/50"
-          > -->
-          <UButton
-            variant="solid"
-            color="neutral"
-            class="scale-90 transform cursor-pointer rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 hover:shadow-xl"
           >
-            Add to Cart
-          </UButton>
-          <!-- </div> -->
+            <UButton
+              variant="solid"
+              color="neutral"
+              class="scale-90 transform cursor-pointer rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 hover:shadow-xl"
+            >
+              Add to Cart
+            </UButton>
+          </div>
         </div>
 
         <!-- Product Details -->
         <div class="mt-2 flex flex-col items-center justify-between px-2 md:mt-4 md:flex-row">
-          <h3
-            class="cursor-pointer text-sm font-medium md:text-base"
-            @click="viewProductDetails(product, product.variant[0].id)"
-          >
+          <h3 class="cursor-pointer text-sm font-medium md:text-base">
             {{ product.name }}
           </h3>
-          <p
-            class="cursor-pointer text-sm font-medium md:text-base"
-            @click="viewProductDetails(product, product.variant[0].id)"
-          >
-            {{ formatCurrency(product.variant[0].price) }}
-          </p>
+          <!-- <p class="cursor-pointer text-sm font-medium md:text-base">
+            {{ formatCurrency(product.price) }}
+          </p> -->
         </div>
       </div>
     </div>

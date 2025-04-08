@@ -6,7 +6,7 @@
       <img
         src="https://framerusercontent.com/images/sQCmgYexIataswnwC1ra5wB4nNc.png"
         alt="logo"
-        class="logo dark:bg-white dark:rounded-2xl pt-3 h-10 w-40 md:h-15"
+        class="logo h-10 w-40 pt-3 md:h-15 dark:rounded-2xl dark:bg-white"
       />
     </RouterLink>
   </section>

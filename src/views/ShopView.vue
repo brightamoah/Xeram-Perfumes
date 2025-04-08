@@ -1,10 +1,13 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <template>
-  <div>
-    <h1>ShopView</h1>
-    <slot />
-  </div>
+  <section class="container mx-auto px-4 py-8">
+    <RouterView v-slot="{ Component }">
+      <component :is="Component" />
+    </RouterView>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Ensure images maintain aspect ratio */
+</style>

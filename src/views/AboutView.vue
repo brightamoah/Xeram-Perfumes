@@ -1,6 +1,9 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container mx-auto px-4 py-8">
+    <IntroSection />
+    <CreativitySection />
+    <CraftSection />
+    <DiscoverSection />
   </div>
 </template>
 
