@@ -11,6 +11,9 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     ui({
+      theme: {
+        transitions: true,
+      },
       ui: {
         navigationMenu: {
           compoundVariants: [
