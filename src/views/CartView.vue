@@ -20,7 +20,7 @@
           to="/shop"
           class="flex items-center gap-2 rounded-full border-4 px-4 py-3 transition-transform hover:scale-105"
         >
-          <UIcon name="i-heroicons-arrow-left" />
+          <UIcon name="i-lucide-arrow-left" class="size-5" />
           Continue Shopping
         </UButton>
       </div>
@@ -81,30 +81,18 @@
                     />
                   </div>
 
-                  <UButton
-                    color="error"
-                    variant="soft"
-                    icon="i-heroicons-trash"
-                    @click="removeItemFromCart(item.id)"
-                    class="transition-all hover:text-red-500"
-                  >
-                    Remove
-                  </UButton>
+                  <ConfirmationModal
+                    action-type="remove"
+                    :item="{ name: item.name, size: item.size }"
+                    @confirm="removeItemFromCart(item.id)"
+                  />
                 </div>
               </div>
             </li>
           </TransitionGroup>
 
           <div class="mt-6 flex justify-between">
-            <UButton
-              color="neutral"
-              variant="subtle"
-              leading-icon="i-carbon-shopping-cart-clear"
-              @click="clearCart()"
-              class="rounded-full px-6 transition-all duration-200 hover:scale-105 hover:bg-(--ui-bg-muted) hover:text-(--ui-text-highlighted)"
-            >
-              Clear Cart
-            </UButton>
+            <ConfirmationModal action-type="clear" @confirm="clearCart" />
             <UButton
               color="neutral"
               to="/shop"
@@ -165,6 +153,7 @@ import { formatCurrency } from '@/utils/formatCurrency'
 import { vAutoAnimate } from '@formkit/auto-animate/vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import ConfirmationModal from '@/components/shop/ConfirmationModal.vue'
 
 const router = useRouter()
 
