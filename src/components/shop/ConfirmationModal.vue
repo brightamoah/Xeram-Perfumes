@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { error } from 'console'
 import { computed, ref } from 'vue'
 
 const open = ref(false)
