@@ -49,9 +49,13 @@
           {{ item.description }}
         </p>
         <div class="mt-10">
-          <RouterLink to="/shop/all-products" class="editorial-cta group inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-obsidian dark:text-ivory font-light">
-            <span class="group-hover:text-gold transition-colors duration-300">Discover More</span>
-            <span class="editorial-arrow text-gold transition-transform duration-300 group-hover:translate-x-2">→</span>
+          <RouterLink
+            to="/shop"
+            class="editorial-cta group inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-ivory-950  font-light"
+          >
+            <span class="group-hover:text-gold-500 transition-colors duration-300">Discover More</span>
+
+            <span class="editorial-arrow text-gold-500 transition-transform duration-300 group-hover:translate-x-2">→</span>
           </RouterLink>
         </div>
       </div>

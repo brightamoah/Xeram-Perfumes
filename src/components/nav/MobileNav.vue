@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import type { MenuItems } from '@/types/types'
-import { watch } from 'vue'
+import type { MenuItems } from "@/types/types";
+import { watch } from "vue";
 
-const props = defineProps({
-  mobileMenuOpen: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  menuItems: {
-    type: Array as () => MenuItems[],
-    required: true,
-  },
-  activeLink: {
-    type: String,
-    required: true,
-  },
+const { mobileMenuOpen, menuItems, activeLink, setActiveLink } = defineProps<{
+  mobileMenuOpen: boolean;
+  menuItems: MenuItems[];
+  activeLink: string;
+  setActiveLink: () => void;
+}>();
 
-  setActiveLink: {
-    type: Function,
-    required: true,
-  },
-})
-
-const emit = defineEmits(['toggle-mobile-menu'])
+const emit = defineEmits<{
+  (e: "toggle-mobile-menu"): void;
+}>();
 
 function toggleMobileMenu() {
-  emit('toggle-mobile-menu')
+  emit("toggle-mobile-menu");
 }
 
 watch(
-  () => props.activeLink,
+  () =>
+    activeLink,
   (newVal) => {
-    console.log('Active link updated: ' + newVal)
+    console.log(`Active link updated: ${newVal}`);
   },
   {
     immediate: true,
     deep: true,
   },
-)
+);
 </script>
 
 <template>
-  <MobileToggle :mobile-menu-open="mobileMenuOpen" @toggle-mobile-menu="toggleMobileMenu" />
+  <MobileToggle
+    :mobile-menu-open="mobileMenuOpen"
+    @toggle-mobile-menu="toggleMobileMenu"
+  />
 
-  <transition name="slide-down" mode="out-in">
+  <transition
+    name="slide-down"
+    mode="out-in"
+  >
     <div
       v-if="mobileMenuOpen"
-      class="absolute top-full left-0 z-40 w-full overflow-hidden bg-(--ui-bg) shadow-lg md:hidden"
+      class="md:hidden top-full left-0 z-40 absolute bg-ivory-50 shadow-lg rounded-b-2xl w-full overflow-hidden"
     >
-      <nav class="container mx-auto">
+      <nav class="mx-auto container">
         <ul class="flex flex-col divide-y divide-(--ui-border) rounded-lg">
-          <li v-for="item in menuItems" :key="item.label" class="w-full" @click="setActiveLink()">
+          <li
+            v-for="item in menuItems"
+            :key="item.label"
+            class="w-full"
+            @click="setActiveLink()"
+          >
             <RouterLink
               :to="item.route"
+              class="block px-6 py-4 rounded-3xl w-full font-medium text-lg transition-colors duration-200 ease-in-out"
               :class="[
-                'block w-full px-6 py-4 text-lg font-medium transition-colors duration-200 ease-in-out',
                 activeLink === item.route?.name?.toString()
-                  ? 'active bg-(--ui-bg-accented) font-bold'
-                  : 'text-(--ui-text-muted)',
+                  ? 'active bg-amber-200/50 font-bold'
+                  : 'text-muted',
               ]"
             >
               {{ item.label }}
@@ -66,19 +66,21 @@ watch(
           </li>
         </ul>
 
-        <div class="flex items-center justify-center gap-3 p-4">
-          <RouterLink to="/login" class="w-full">
-            <button
-              class="w-full rounded-full bg-black px-4 py-3 text-center font-bold text-white shadow-md transition-all duration-200 hover:border-2 hover:bg-white/20 hover:text-black"
-            >
+        <div class="flex justify-center items-center gap-3 p-4">
+          <RouterLink
+            :to="{ name: '/login' }"
+            class="w-full"
+          >
+            <button class="bg-black hover:bg-white/20 shadow-md px-4 py-3 hover:border-2 rounded-full w-full font-bold text-white hover:text-black text-center transition-all duration-200">
               Login
             </button>
           </RouterLink>
 
-          <RouterLink to="/signup" class="w-full">
-            <button
-              class="w-full rounded-full border-2 border-black bg-white px-4 py-3 text-center font-bold text-black transition-all duration-200 hover:bg-black hover:text-white"
-            >
+          <RouterLink
+            :to="{ name: '/signup' }"
+            class="w-full"
+          >
+            <button class="bg-ivory-200 hover:bg-black px-4 py-3 border-2 border-black rounded-full w-full font-bold text-black hover:text-white text-center transition-all duration-200">
               Sign Up
             </button>
           </RouterLink>

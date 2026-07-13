@@ -1,89 +1,174 @@
 <script setup lang="ts">
-import { useDateFormat, useNow } from '@vueuse/core'
+import { useDateFormat, useNow, useWindowScroll } from "@vueuse/core";
+import { useRoute, useRouter } from "vue-router";
+import InstagramIcon from "@/components/icons/InstagramIcon.vue";
+import WhatsAPP from "@/components/icons/WhatsAPP.vue";
+import FaceBook from "@/components/icons/FaceBook.vue";
+import TwitterIcon from "@/components/icons/TwitterIcon.vue";
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+const route = useRoute();
+const router = useRouter();
+
+// Use VueUse for scrolling with smooth behavior
+const { y } = useWindowScroll({ behavior: 'smooth' });
+
+function scrollToTop() {
+  y.value = 0;
 }
 
-const currentYear = useDateFormat(useNow(), 'YYYY')
+function handleNav(e: Event, to: string) {
+  if (to.startsWith('/#')) {
+    e.preventDefault();
+    const targetId = to.substring(2);
+    
+    // Let Vue Router handle the URL and state update
+    router.push({ path: '/', hash: '#' + targetId }).then(() => {
+      // Short delay to ensure DOM is ready, especially if coming from another page
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          // Calculate target position and offset by 100px for fixed navbar
+          const top = el.getBoundingClientRect().top + window.scrollY - 100;
+          
+          // Scroll using VueUse
+          y.value = top;
+        }
+      }, 150);
+    });
+  }
+}
 
-const footerLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'Shop', to: '/shop' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
-  { label: 'Reviews', to: '/reviews' },
-]
+const currentYear = useDateFormat(useNow(), "YYYY");
+
+const exploreLinks = [
+  { label: "Home", to: "/" },
+  { label: "Shop", to: "/shop" },
+  { label: "Collections", to: "/#collection" },
+];
+
+const infoLinks = [
+  { label: "Why Choose Us", to: "/#why-choose" },
+  { label: "Delivery", to: "/#delivery" },
+  { label: "FAQ", to: "/#faq" },
+];
+
+const supportLinks = [
+  { label: "Contact", to: "/contact" },
+];
+
+const socials = [
+  { component: InstagramIcon, href: "#", iconClass: "size-4" },
+  { component: WhatsAPP, href: "#", iconClass: "size-4" },
+  { component: FaceBook, href: "#", iconClass: "size-4" },
+  { component: TwitterIcon, href: "#", iconClass: "size-5" },
+];
 </script>
 
 <template>
-  <footer class="footer-luxury w-full bg-obsidian overflow-hidden">
-
+  <footer class="bg-ivory-950 w-full overflow-hidden footer-luxury">
     <!-- Gold top border -->
     <div class="gold-divider-full" />
 
     <!-- Main footer content -->
-    <div class="max-w-6xl mx-auto px-8 py-20">
-
+    <div class="mx-auto max-w-6xl">
       <!-- Logo + tagline -->
-      <div class="text-center mb-16">
-        <RouterLink to="/" class="inline-block mb-6">
+      <div class="mb-10 text-center">
+        <RouterLink
+          to="/"
+          class="inline-block mb-4"
+        >
           <img
             src="https://framerusercontent.com/images/sQCmgYexIataswnwC1ra5wB4nNc.png"
             alt="Xeram Perfumes"
-            class="h-12 w-auto mx-auto object-contain brightness-0 invert"
-          />
+            class="brightness-0 invert mx-auto w-auto h-18 object-contain"
+          >
         </RouterLink>
-        <div class="gold-divider mx-auto mb-6" />
-        <p class="text-[10px] tracking-[0.4em] uppercase text-ash font-light">
+
+        <div class="mx-auto mb-6 gold-divider" />
+
+        <p class="font-light text-ivory-500 text-xs uppercase tracking-[0.4em]">
           Crafted for the connoisseur
         </p>
       </div>
 
       <!-- Nav links -->
-      <nav class="flex flex-wrap items-center justify-center gap-8 mb-16">
-        <RouterLink
-          v-for="link in footerLinks"
-          :key="link.label"
-          :to="link.to"
-          class="footer-link text-[10px] tracking-[0.3em] uppercase font-light text-ash hover:text-gold transition-colors duration-300"
-        >
-          {{ link.label }}
-        </RouterLink>
+      <nav class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center mb-16 max-w-3xl mx-auto">
+        <!-- Explore Group -->
+        <div class="flex flex-col items-center gap-5">
+          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Explore</h4>
+          <RouterLink
+            v-for="link in exploreLinks"
+            :key="link.label"
+            :to="link.to"
+            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            @click="handleNav($event, link.to)"
+          >
+            {{ link.label }}
+          </RouterLink>
+        </div>
+
+        <!-- Information Group -->
+        <div class="flex flex-col items-center gap-5">
+          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Information</h4>
+          <RouterLink
+            v-for="link in infoLinks"
+            :key="link.label"
+            :to="link.to"
+            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            @click="handleNav($event, link.to)"
+          >
+            {{ link.label }}
+          </RouterLink>
+        </div>
+
+        <!-- Support Group -->
+        <div class="flex flex-col items-center gap-5">
+          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Support</h4>
+          <RouterLink
+            v-for="link in supportLinks"
+            :key="link.label"
+            :to="link.to"
+            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            @click="handleNav($event, link.to)"
+          >
+            {{ link.label }}
+          </RouterLink>
+        </div>
       </nav>
 
       <!-- Social icons -->
-      <div class="flex items-center justify-center gap-6 mb-16">
-        <a href="#" class="social-icon group">
-          <InstagramIcon class="size-4 text-ash group-hover:text-gold transition-colors duration-300" />
-        </a>
-        <a href="#" class="social-icon group">
-          <WhatsAPP class="size-4 text-ash group-hover:text-gold transition-colors duration-300" />
-        </a>
-        <a href="#" class="social-icon group">
-          <FaceBook class="size-4 text-ash group-hover:text-gold transition-colors duration-300" />
-        </a>
-        <a href="#" class="social-icon group">
-          <TwitterIcon class="size-5 text-ash group-hover:text-gold transition-colors duration-300" />
+      <div class="flex justify-center items-center gap-6 mb-16">
+        <a
+          v-for="(social, index) in socials"
+          :key="index"
+          :href="social.href"
+          class="group social-icon"
+        >
+          <component
+            :is="social.component"
+            :class="[social.iconClass, 'text-ivory-500 group-hover:text-gold-500 transition-colors duration-300']"
+          />
         </a>
       </div>
 
       <!-- Bottom bar -->
-      <div class="gold-divider-full mb-8" />
-      <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-        <p class="text-[10px] tracking-[0.2em] uppercase text-ash/60 font-light">
+      <div class="mb-8 gold-divider-full" />
+
+      <div class="flex sm:flex-row flex-col justify-between items-center gap-4 mb-5">
+        <p class="font-light text-[10px] text-ivory-500/60 uppercase tracking-[0.2em]">
           © {{ currentYear }} Xeram Perfumes. All rights reserved.
         </p>
+
         <button
+          class="group back-to-top flex items-center gap-2 font-light text-[10px] text-ivory-500 hover:text-gold-500 uppercase tracking-[0.3em] transition-colors duration-300"
           @click="scrollToTop"
-          class="back-to-top group flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-ash hover:text-gold transition-colors duration-300 font-light"
         >
           <span>Back to Top</span>
-          <span class="back-to-top-arrow text-gold transition-transform duration-300 group-hover:-translate-y-1">↑</span>
+
+          <span class="back-to-top-arrow text-gold-500 transition-transform group-hover:-translate-y-1 duration-300">↑</span>
         </button>
       </div>
     </div>
-
   </footer>
 </template>
 
@@ -92,9 +177,15 @@ const footerLinks = [
   background-color: #0a0a0a;
 }
 
-.text-gold { color: #c9a84c; }
-.text-ash { color: #888888; }
-.bg-obsidian { background-color: #0a0a0a; }
+.text-gold-500 {
+  color: #c9a84c;
+}
+.text-ivory-500 {
+  color: #888888;
+}
+.bg-ivory-950 {
+  background-color: #0a0a0a;
+}
 
 .gold-divider {
   width: 48px;
@@ -104,7 +195,7 @@ const footerLinks = [
 .gold-divider-full {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.25), transparent);
 }
 
 .social-icon {
@@ -114,7 +205,9 @@ const footerLinks = [
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 .social-icon:hover {
   border-color: rgba(201, 168, 76, 0.4);
@@ -125,7 +218,7 @@ const footerLinks = [
   position: relative;
 }
 .footer-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -136,7 +229,13 @@ const footerLinks = [
   transform-origin: left;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.footer-link:hover::after { transform: scaleX(1); }
+.footer-link:hover::after {
+  transform: scaleX(1);
+}
 
-.back-to-top { background: none; border: none; cursor: pointer; }
+.back-to-top {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 </style>

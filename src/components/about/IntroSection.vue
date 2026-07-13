@@ -3,9 +3,12 @@
 <template>
   <div class="mx-auto w-full px-3 py-6 md:px-10 md:py-8">
     <section>
-      <h3 class="mb-2 text-lg font-medium">Heritage</h3>
+      <h3 class="mb-2 text-lg font-medium">
+        Heritage
+      </h3>
+
       <h1 class="text-2xl font-medium text-(-ui-text-highlighted) md:text-3xl">
-        The Essence of Luxury in <br />
+        The Essence of Luxury in <br>
         Every Bottle
       </h1>
 
@@ -22,7 +25,7 @@
         src="/img/about.webp"
         alt="image"
         class="h-45 w-[87%] rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105 md:h-75 md:w-[70%]"
-      />
+      >
     </section>
   </div>
 </template>

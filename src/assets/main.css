@@ -1,30 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap');
-@import 'tailwindcss';
-@import '@nuxt/ui';
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap");
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+body {
+  background-color: var(--color-ivory-100);
+}
 
 @theme {
-  --font-inter: 'Inter', sans-serif;
-  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-inter: "Inter", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-newsreader: "Newsreader", serif;
+  --font-geist: "Geist", sans-serif;
+  --font-mono: "Geist Mono", sans-serif;
+  --font-code: "Fira Code", "JetBrains Mono", monospace;
+  --font-DM: "DM Serif Display", Georgia, serif;
 
-  /* Luxury Palette */
-  --color-obsidian: #0a0a0a;
-  --color-ivory: #f5f0eb;
-  --color-gold: #c9a84c;
-  --color-gold-light: #e8d5a3;
-  --color-gold-dark: #a07830;
-  --color-charcoal: #1a1a1a;
-  --color-graphite: #2a2a2a;
-  --color-ash: #888888;
-  --color-smoke: #444444;
+  /* Custom Palette: Gold */
+  --color-gold-50: #fefce8;
+  --color-gold-100: #fdf6b2;
+  --color-gold-200: #fce96a;
+  --color-gold-300: #faca15;
+  --color-gold-400: #e3a008;
+  --color-gold-500: #c9a84c; /* Gold */
+  --color-gold-600: #a07830; /* Gold Dark */
+  --color-gold-700: #8e4b10;
+  --color-gold-800: #723b13;
+  --color-gold-900: #5c3516;
+  --color-gold-950: #3f200c;
 
-  /* Legacy compat */
-  --color-black_text: #0a0a0a;
-  --color-main-bg: #f5f0eb;
-  --color-cream: #f0ebe4;
-  --color-grey: #888888;
-  --color-primary-gold: #c9a84c;
-  --color-primary-dark: #0a0a0a;
-  --color-dark-glass: #0a0a0a;
+  /* Custom Palette: Ivory to Obsidian */
+  --color-ivory-50: #f5f0eb; /* Ivory */
+  --color-ivory-100: #f0ebe4; /* Cream */
+  --color-ivory-200: #e5e0d8;
+  --color-ivory-300: #d1cbc3;
+  --color-ivory-400: #bbbbbb; /* Smoke light */
+  --color-ivory-500: #888888; /* Ash */
+  --color-ivory-600: #666666;
+  --color-ivory-700: #444444; /* Smoke dark */
+  --color-ivory-800: #2a2a2a; /* Graphite */
+  --color-ivory-900: #1a1a1a; /* Charcoal */
+  --color-ivory-950: #0a0a0a; /* Obsidian */
 
   /* Animations */
   --animate-fade-in-up: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -36,49 +51,100 @@
 
 /* ─────────────── Keyframes ─────────────── */
 @keyframes fade-in-up {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes reveal {
-  0% { opacity: 0; transform: translateY(60px) skewY(2deg); }
-  100% { opacity: 1; transform: translateY(0) skewY(0deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(60px) skewY(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewY(0deg);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes gold-pulse {
-  0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(201, 168, 76, 0.3); }
-  50% { opacity: 1; box-shadow: 0 0 25px rgba(201, 168, 76, 0.6); }
+  0%,
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 25px rgba(201, 168, 76, 0.6);
+  }
 }
 
 @keyframes particle-drift {
-  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { transform: translateY(-120px) translateX(30px) scale(0.5); opacity: 0; }
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120px) translateX(30px) scale(0.5);
+    opacity: 0;
+  }
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes underline-grow {
-  0% { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
 }
 
 @keyframes scroll-bounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.5; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.5;
+  }
 }
 
 /* ─────────────── Base Layer ─────────────── */
@@ -92,14 +158,11 @@
 
   body {
     font-family: var(--font-inter);
-    background-color: var(--color-ivory);
-    color: var(--color-obsidian);
-    transition: background-color 0.5s ease, color 0.5s ease;
-  }
-
-  .dark body {
-    background-color: var(--color-obsidian);
-    color: var(--color-ivory);
+    background-color: var(--color-ivory-50);
+    color: var(--color-ivory-950);
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease;
   }
 
   /* Luxury scrollbar */
@@ -109,10 +172,15 @@
     scrollbar-color: rgba(201, 168, 76, 0.3) transparent;
   }
 
-  ::-webkit-scrollbar { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, rgba(201,168,76,0.4), rgba(201,168,76,0.1));
+    background: linear-gradient(180deg, rgba(201, 168, 76, 0.4), rgba(201, 168, 76, 0.1));
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -126,7 +194,7 @@
 }
 
 .text-gold {
-  color: var(--color-gold);
+  color: var(--color-gold-500);
 }
 
 .text-gold-gradient {
@@ -148,62 +216,76 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 3rem;
   background: transparent;
-  border: 1px solid var(--color-gold);
-  color: var(--color-gold);
+  border: 1px solid var(--color-gold-500);
+  color: var(--color-gold-500);
   font-family: var(--font-inter);
   font-size: 0.65rem;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  z-index: 1;
 }
 
 .luxury-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: var(--color-gold);
+  background: var(--color-gold-500);
   transform: translateX(-101%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 0;
+  z-index: -1;
 }
 
-.luxury-btn:hover::before { transform: translateX(0); }
-.luxury-btn:hover { color: var(--color-obsidian); }
-.luxury-btn > * { position: relative; z-index: 1; }
+.luxury-btn:hover::before {
+  transform: translateX(0);
+}
+.luxury-btn:hover {
+  color: var(--color-ivory-950);
+}
+.luxury-btn > * {
+  position: relative;
+  z-index: 1;
+}
 
 .luxury-btn-dark {
-  background: var(--color-obsidian);
-  border-color: var(--color-obsidian);
-  color: var(--color-ivory);
+  background: var(--color-ivory-950);
+  border-color: var(--color-ivory-950);
+  color: var(--color-ivory-50);
 }
-.luxury-btn-dark::before { background: var(--color-gold); }
-.luxury-btn-dark:hover { color: var(--color-obsidian); border-color: var(--color-gold); }
+.luxury-btn-dark::before {
+  background: var(--color-gold-500);
+}
+.luxury-btn- {
+  color: var(--color-ivory-950);
+  border-color: var(--color-gold-500);
+}
 
 /* ─────────────── Gold Divider ─────────────── */
 .gold-divider {
   width: 60px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
   margin: 0 auto;
 }
 
 .gold-divider-full {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
 }
 
 /* ─────────────── Scroll Reveal ─────────────── */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-on-scroll.revealed {
   opacity: 1;
@@ -211,10 +293,18 @@
 }
 
 /* Staggered children */
-.stagger-children > *:nth-child(1) { transition-delay: 0s; }
-.stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
-.stagger-children > *:nth-child(3) { transition-delay: 0.2s; }
-.stagger-children > *:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children > *:nth-child(1) {
+  transition-delay: 0s;
+}
+.stagger-children > *:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.stagger-children > *:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.stagger-children > *:nth-child(4) {
+  transition-delay: 0.3s;
+}
 
 /* ─────────────── Glass Card ─────────────── */
 .glass-dark {
@@ -247,7 +337,7 @@
   border-bottom: 1px solid rgba(201, 168, 76, 0.3);
   border-radius: 0;
   padding: 0.75rem 0;
-  color: var(--color-ivory);
+  color: var(--color-ivory-50);
   font-family: var(--font-inter);
   font-size: 0.875rem;
   font-weight: 300;
@@ -257,7 +347,7 @@
   transition: border-color 0.3s ease;
 }
 .luxury-input:focus {
-  border-bottom-color: var(--color-gold);
+  border-bottom-color: var(--color-gold-500);
 }
 .luxury-input::placeholder {
   color: rgba(232, 213, 163, 0.4);
@@ -267,8 +357,11 @@
 }
 
 /* ─────────────── Page Transitions ─────────────── */
-.page-enter-active, .page-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .page-enter-from {
   opacity: 0;

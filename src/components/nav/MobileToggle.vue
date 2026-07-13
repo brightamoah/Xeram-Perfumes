@@ -1,32 +1,42 @@
 <script setup lang="ts">
-//create a prop for the properties using ts
+// create a prop for the properties using ts
 const props = defineProps({
   mobileMenuOpen: {
     type: Boolean,
     default: false,
     required: true,
   },
-})
+});
 
-const emit = defineEmits(['toggle-mobile-menu'])
+const emit = defineEmits<{
+  (e: "toggle-mobile-menu"): void;
+}>();
 
-//function to toggle the mobile menu
+// function to toggle the mobile menu
 function toggleMobileMenu() {
-  emit('toggle-mobile-menu')
+  emit("toggle-mobile-menu");
 }
 </script>
 
 <template>
   <div>
     <UButton
-      class="mr-2 ml-auto flex items-center justify-center rounded-xl p-2 font-bold md:hidden"
-      @click="toggleMobileMenu"
+      class="sm:hidden flex justify-center items-center mr-2 ml-auto p-2 rounded-xl font-bold"
       variant="ghost"
       color="neutral"
+      @click="toggleMobileMenu"
     >
-      <UIcon name="i-lucide-menu" class="size-8" v-if="!props.mobileMenuOpen" />
+      <UIcon
+        v-if="!props.mobileMenuOpen"
+        name="i-lucide-menu"
+        class="size-8 text-black"
+      />
 
-      <UIcon name="i-lucide-x" class="size-8" v-else />
+      <UIcon
+        v-else
+        name="i-lucide-x"
+        class="size-8 text-black"
+      />
     </UButton>
   </div>
 </template>

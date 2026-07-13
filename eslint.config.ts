@@ -1,26 +1,90 @@
-import pluginVue from 'eslint-plugin-vue'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
-import oxlint from 'eslint-plugin-oxlint'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import antfu from "@antfu/eslint-config";
 
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
-
-export default defineConfigWithVueTs(
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+export default antfu({
+  vue: true,
+  typescript: true,
+  formatters: true,
+  stylistic: {
+    indent: 2,
+    semi: true,
+    quotes: "double",
   },
+  rules: {
+    "no-console": "warn",
+    "vue/custom-event-name-casing": "off",
+    "style/max-statements-per-line": "off",
+    "vue/no-required-prop-with-default": "off",
+    "antfu/if-newline": "off",
+    "vue/max-attributes-per-line": ["error", {
+      singleline: {
+        max: 1,
+      },
+      multiline: {
+        max: 1,
+      },
+    }],
+    "ts/no-redeclare": "off",
+    "vue/require-typed-ref": "error",
+    "vue/block-order": [
+      "error",
+      { order: ["script", "template", "style"] },
+    ],
+    "vue/first-attribute-linebreak": [
+      "error",
+      {
+        singleline: "beside",
+        multiline: "below",
+      },
+    ],
+    // Enforce new line between each tag
+    "vue/padding-line-between-tags": [
+      "error",
+      [{
+        blankLine: "always",
+        prev: "*",
+        next: "*",
+      }],
+    ],
+    "vue/singleline-html-element-content-newline": [
+      "error",
+      {
+        ignoreWhenNoAttributes: true,
+        ignoreWhenEmpty: true,
+      },
+    ],
+    // Enforce PascalCase for component names
+    "vue/component-name-in-template-casing": [
+      "error",
+      "PascalCase",
+      {
+        registeredComponentsOnly: true,
+        ignores: [],
+      },
+    ],
 
-  {
-    name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
+    // Enforce <script setup lang="ts"> on .vue files
+    "vue/block-lang": [
+      "error",
+      { script: { lang: "ts" } },
+    ],
+
+    // Enforce <script setup> on .vue files
+    "vue/component-api-style": [
+      "error",
+      ["script-setup"],
+    ],
+
+    // Enforce typed emits
+    "vue/define-emits-declaration": ["error", "type-based"],
+
+    // Enforce order of define macros
+    "vue/define-macros-order": ["error", { order: ["defineProps", "defineEmits"] }],
+
+    "vue/new-line-between-multi-line-property": ["error", { minLineOfMultilineProperty: 2 }],
+    "ts/consistent-type-definitions": ["off"],
+    "antfu/no-top-level-await": ["off"],
+    "node/prefer-global/process": ["off"],
+    "node/no-process-env": ["error"],
+    "antfu/top-level-functions": ["off"],
   },
-
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
-  ...oxlint.configs['flat/recommended'],
-  skipFormatting,
-)
+});

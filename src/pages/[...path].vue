@@ -1,21 +1,28 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex h-[68vh] w-full flex-col items-center justify-center">
+  <div class="flex flex-col justify-center items-center w-full h-[68vh]">
     <div class="text-center">
-      <h1 class="mb-4 text-6xl font-bold text-(--ui-text-highlighted)">404</h1>
-      <h2 class="mb-2 text-2xl font-semibold">Oops! Page not found</h2>
+      <h1 class="mb-4 font-bold text-highlighted text-6xl">
+        404
+      </h1>
+
+      <h2 class="mb-2 font-semibold text-2xl">
+        Oops! Page not found
+      </h2>
+
       <p class="mb-6">
         The page you are looking for might have been removed, had its name changed, or is
         temporarily unavailable.
       </p>
+
       <UButton
         to="/"
         variant="solid"
         color="neutral"
-        class="rounded-full px-6 py-3 font-medium shadow-md transition-all"
+        class="shadow-md px-6 py-3 rounded-full font-medium transition-all"
       >
-        Go Back To Home
+        Back To Home
       </UButton>
     </div>
   </div>

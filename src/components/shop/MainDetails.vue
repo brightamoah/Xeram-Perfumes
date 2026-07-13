@@ -71,7 +71,7 @@ onMounted(() => {
       <div class="mb-12 flex items-center gap-3 text-[9px] tracking-[0.3em] uppercase text-ash font-light">
         <RouterLink to="/" class="hover:text-gold transition-colors duration-300">Home</RouterLink>
         <span class="text-gold/40">—</span>
-        <RouterLink to="/shop/all-products" class="hover:text-gold transition-colors duration-300">Shop</RouterLink>
+        <RouterLink to="/shop" class="hover:text-gold transition-colors duration-300">Shop</RouterLink>
         <span class="text-gold/40">—</span>
         <span class="text-obsidian dark:text-ivory">{{ product.name }}</span>
       </div>

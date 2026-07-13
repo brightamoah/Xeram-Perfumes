@@ -1,43 +1,47 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
-const open = ref(false)
+import { computed, ref } from "vue";
 
 const props = defineProps<{
-  actionType: 'remove' | 'clear'
-  item?: { name: string; size: string }
-}>()
+  actionType: "remove" | "clear";
+  item?: { name: string; size: string };
+}>();
 
 const emit = defineEmits<{
-  (e: 'confirm'): void
-}>()
+  (e: "confirm"): void;
+}>();
+
+const open = ref(false);
 
 const title = computed(() => {
-  return props.actionType === 'remove' ? 'Remove Item' : 'Clear Cart'
-})
+  return props.actionType === "remove" ? "Remove Item" : "Clear Cart";
+});
 
 const message = computed(() => {
-  return props.actionType === 'remove'
+  return props.actionType === "remove"
     ? `Are you sure you want to remove <strong>${props.item?.name} (${props.item?.size})</strong> from your cart?`
-    : 'Are you sure you want to clear all items from your cart?'
-})
+    : "Are you sure you want to clear all items from your cart?";
+});
 
 const confirmButtonText = computed(() => {
-  return props.actionType === 'remove' ? 'Remove' : 'Clear'
-})
+  return props.actionType === "remove" ? "Remove" : "Clear";
+});
 
 const cancelButtonText = computed(() => {
-  return 'Cancel'
-})
+  return "Cancel";
+});
 
-const handleConfirm = () => {
-  emit('confirm')
-  open.value = false
+function handleConfirm() {
+  emit("confirm");
+  open.value = false;
 }
 </script>
 
 <template>
-  <UModal v-model:open="open" :title="title" :ui="{ footer: 'justify-end' }">
+  <UModal
+    v-model:open="open"
+    :title="title"
+    :ui="{ footer: 'justify-end' }"
+  >
     <!-- <UButton label="Open" color="neutral" variant="subtle" /> -->
 
     <div>
@@ -63,7 +67,10 @@ const handleConfirm = () => {
     </div>
 
     <template #body>
-      <p class="text-base text-(--ui-text)" v-html="message"></p>
+      <p
+        class="text-base text-(--ui-text)"
+        v-html="message"
+      />
     </template>
 
     <template #footer>
@@ -71,10 +78,16 @@ const handleConfirm = () => {
         :label="cancelButtonText"
         color="neutral"
         variant="subtle"
-        @click="open = false"
         class="mr-2"
+        @click="() => { open = false }"
       />
-      <UButton :label="confirmButtonText" @click="handleConfirm" variant="subtle" color="error" />
+
+      <UButton
+        :label="confirmButtonText"
+        variant="subtle"
+        color="error"
+        @click="handleConfirm"
+      />
     </template>
   </UModal>
 </template>

@@ -1,62 +1,63 @@
-import type { RouteRecordNameGeneric } from 'vue-router'
+import type { RouteLocationRaw } from "vue-router";
+import type { RouteNamedMap } from "vue-router/auto-routes";
 
 export interface MenuItems {
-  label: string
-  to?: string
-  route: { name: RouteRecordNameGeneric }
+  label: string;
+  to?: RouteLocationRaw;
+  route: { name: keyof RouteNamedMap };
 }
 
 export interface Collection {
-  title: string
-  description: string
-  image: string
+  title: string;
+  description: string;
+  image: string;
 }
 
 export interface Delivery {
-  title: string
-  description: string
-  image: string
-  srcSet?: string
-  imageAlt: string
+  title: string;
+  description: string;
+  image: string;
+  srcSet?: string;
+  imageAlt: string;
 }
 
-export type Variant = {
-  id: number
-  size: string
-  price: number
-  image: string
+export interface Variant {
+  id: number;
+  size: string;
+  price: number;
+  image: string;
 }
 
-export type Product = {
-  id: number
-  name: string
-  defaultImage: string
-  category?: string
-  description?: string
-  variant: Variant[]
+export interface Product {
+  id: number;
+  name: string;
+  defaultImage: string;
+  category?: string;
+  description?: string;
+  variant: Variant[];
 }
 
-export type Variants = {
-  variantId: number
-  size: string
-  price: number
-  image: string
+export interface Variants {
+  variantId: number;
+  size: string;
+  price: number;
+  image: string;
 }
 
-export type NewProduct = {
-  id: number
-  name: string
-  category?: string
-  description?: string
-  variants: Variants[]
+export interface NewProduct {
+  id: number;
+  name: string;
+  category?: string;
+  description?: string;
+  variants: Variants[];
 }
 
-export type CartItem = {
-  id: number
-  productId: number
-  name: string
-  size: string
-  price: number
-  image: string
-  quantity: number
+export interface CartItem {
+  id: number;
+  productId: number;
+  name: string;
+  size: string;
+  price: number;
+  image: string;
+  quantity: number;
 }

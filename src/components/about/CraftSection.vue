@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 // Image source (replace with the actual path to your image)
-const fragranceImage = ref<string>('/img/about3.png')
+const fragranceImage = ref<string>("/img/about3.png");
 </script>
 
 <template>
@@ -10,11 +10,10 @@ const fragranceImage = ref<string>('/img/about3.png')
     <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
       <!-- Text Section -->
       <div class="w-full text-center md:w-1/2 md:text-left">
-        <h1
-          class="mb-4 text-left text-3xl leading-tight font-light text-(--ui-text-highlighted) md:text-3xl"
-        >
+        <h1 class="mb-4 text-left text-3xl leading-tight font-light text-(--ui-text-highlighted) md:text-3xl">
           Crafting Luxury Fragrances with Unmatched Precision and Quality
         </h1>
+
         <p class="mb-8 text-base leading-relaxed">
           At Xeram Perfumes, we believe that every scent tells a story. Our commitment to excellence
           is reflected in the meticulous attention to detail in every fragrance we create.
@@ -27,6 +26,7 @@ const fragranceImage = ref<string>('/img/about3.png')
             <h3 class="mb-2 text-lg font-medium text-(--ui-text-highlighted) md:text-xl">
               Quality Materials
             </h3>
+
             <p class="text-sm leading-relaxed md:text-base">
               We source only the finest ingredients to ensure an exceptional olfactory experience.
             </p>
@@ -37,6 +37,7 @@ const fragranceImage = ref<string>('/img/about3.png')
             <h3 class="mb-2 text-lg font-medium text-(--ui-text-highlighted) md:text-xl">
               Artisan Craftsmanship
             </h3>
+
             <p class="text-sm leading-relaxed md:text-base">
               Our expert artisans pour their heart into each bottle, ensuring unmatched quality and
               elegance.
@@ -52,7 +53,7 @@ const fragranceImage = ref<string>('/img/about3.png')
             :src="fragranceImage"
             alt="Artisan fragrance crafting"
             class="h-full w-full object-cover object-center transition-transform duration-300 hover:scale-105"
-          />
+          >
         </div>
       </div>
     </div>

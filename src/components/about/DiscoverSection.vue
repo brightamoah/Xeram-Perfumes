@@ -6,15 +6,13 @@
         src="/img/discover.avif"
         alt="Xeram Luxury Fragrances"
         class="h-full w-full object-cover"
-      />
+      >
 
       <!-- Overlay to darken the image and improve text readability -->
-      <div class="bg-opacity-40 absolute inset-0 bg-black/50"></div>
+      <div class="bg-opacity-40 absolute inset-0 bg-black/50" />
 
       <!-- Content Container -->
-      <div
-        class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center md:px-8"
-      >
+      <div class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center md:px-8">
         <!-- Main Heading -->
         <h2 class="mb-3 text-3xl font-light text-white md:mb-4 md:text-4xl lg:text-5xl">
           Discover Our Exquisite Fragrances

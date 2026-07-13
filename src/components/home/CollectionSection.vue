@@ -55,7 +55,7 @@
 
     <!-- CTA -->
     <div class="reveal-on-scroll text-center mt-16">
-      <RouterLink to="/shop/all-products" class="luxury-btn">
+      <RouterLink to="/shop" class="luxury-btn px-12 py-4">
         Browse All Collections
         <span class="ml-2">→</span>
       </RouterLink>

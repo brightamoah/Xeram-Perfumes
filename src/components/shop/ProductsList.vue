@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useProductStore } from '@/stores/ProductStore'
-import type { Product } from '@/types/types'
-import { vAutoAnimate } from '@formkit/auto-animate/vue'
-import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
+import type { Product } from "@/types/types";
+import { vAutoAnimate } from "@formkit/auto-animate/vue";
+import { storeToRefs } from "pinia";
+import { computed, ref } from "vue";
+import { useProductStore } from "@/stores/ProductStore";
 
 // const id = ref<number>(1)
 
@@ -15,9 +15,9 @@ import { computed, ref } from 'vue'
 //   }).format(value)
 // }
 
-const productStore = useProductStore()
+const productStore = useProductStore();
 
-const { products } = storeToRefs(productStore)
+const { products } = storeToRefs(productStore);
 
 // const products = ref<Product[]>([
 //   {
@@ -57,36 +57,36 @@ const { products } = storeToRefs(productStore)
 //   },
 // ])
 
-const categories = ref<string[]>(['All Product', 'Xeram Impressions', 'Xeram Originals'])
-const selectedCategory = ref<string>('All Product')
+const categories = ref<string[]>(["All Product", "Xeram Impressions", "Xeram Originals"]);
+const selectedCategory = ref<string>("All Product");
 
 const filteredProducts = computed<Product[]>(() => {
-  if (selectedCategory.value === 'All Product') return products.value
-  return products.value.filter((product) => product.category === selectedCategory.value)
-})
+  if (selectedCategory.value === "All Product") return products.value;
+  return products.value.filter(product => product.category === selectedCategory.value);
+});
 </script>
 
 <template>
   <div>
     <!-- Header Section -->
     <div class="mb-12 text-center">
-      <h1 class="mb-2 text-xl font-light md:text-3xl">
+      <h1 class="mb-2 font-light text-xl md:text-3xl">
         Check out our full collection of products tailored to your needs
       </h1>
     </div>
 
     <!-- Category Filters -->
-    <div class="mb-8 flex justify-center space-x-4">
+    <div class="flex justify-center space-x-4 mb-8">
       <button
         v-for="category in categories"
         :key="category"
-        @click="selectedCategory = category"
+        class="rounded-full px-2.5 py-3 text-xs font-medium transition-colors duration-300 md:px-6 md:py-4 md:text-base"
         :class="[
-          'rounded-full px-2.5 py-3 text-xs font-medium transition-colors duration-300 md:px-6 md:py-4 md:text-base',
           selectedCategory === category
-            ? 'bg-(--ui-bg-inverted) text-white dark:text-black'
+            ? 'bg-(--ui-bg-inverted) text-white '
             : 'border border-(--ui-border-accented) bg-(--ui-bg) hover:bg-(--ui-bg-elevated)',
         ]"
+        @click="selectedCategory = category"
       >
         {{ category }}
       </button>
@@ -94,8 +94,8 @@ const filteredProducts = computed<Product[]>(() => {
 
     <!-- Product Grid -->
     <div
-      class="mx-auto grid w-[80%] grid-cols-2 gap-8 md:grid-cols-4"
       v-auto-animate="{ duration: 400, easing: 'linear' }"
+      class="gap-8 grid grid-cols-2 md:grid-cols-4 mx-auto w-[80%]"
     >
       <div
         v-for="product in filteredProducts"
@@ -104,22 +104,23 @@ const filteredProducts = computed<Product[]>(() => {
       >
         <!-- Product Image -->
         <div
-          class="aspect-w-1 relative aspect-square w-full overflow-hidden rounded-lg"
-          @click="$router.push({ name: 'productDetails', params: { id: product.id } })"
+          class="relative rounded-lg w-full aspect-square aspect-w-1 overflow-hidden"
+          @click="$router.push({
+            name: '/shop/details/[id]/[variantId]',
+            params: { id: product.id, variantId: product.variant[0].id },
+          })"
         >
           <img
             :src="product.defaultImage"
             :alt="product.name"
-            class="aspect-square h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-          />
-          <!-- Add to Cart Button - Overlay -->
-          <div
-            class="bg-opacity-0 group-hover:bg-opacity-30 absolute inset-0 flex items-center justify-center transition-all duration-300 hover:bg-black/50"
+            class="w-full h-full object-center object-cover aspect-square group-hover:scale-105 transition-transform duration-300"
           >
+          <!-- Add to Cart Button - Overlay -->
+          <div class="absolute inset-0 flex justify-center items-center hover:bg-black/50 bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">
             <UButton
               variant="solid"
               color="neutral"
-              class="scale-90 transform cursor-pointer rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-black opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 hover:shadow-xl"
+              class="bg-white opacity-0 group-hover:opacity-100 shadow-lg hover:shadow-xl px-4 py-2.5 rounded-full font-semibold text-black text-sm scale-90 group-hover:scale-100 transition-all duration-300 cursor-pointer transform"
             >
               Add to Cart
             </UButton>
@@ -127,11 +128,11 @@ const filteredProducts = computed<Product[]>(() => {
         </div>
 
         <!-- Product Details -->
-        <div class="mt-2 flex flex-col items-center justify-between px-2 md:mt-4 md:flex-row">
-          <h3 class="cursor-pointer text-sm font-medium md:text-base">
+        <div class="flex md:flex-row flex-col justify-between items-center mt-2 md:mt-4 px-2">
+          <h3 class="font-medium text-sm md:text-base cursor-pointer">
             {{ product.name }}
           </h3>
-          <!-- <p class="cursor-pointer text-sm font-medium md:text-base">
+          <!-- <p class="font-medium text-sm md:text-base cursor-pointer">
             {{ formatCurrency(product.price) }}
           </p> -->
         </div>
