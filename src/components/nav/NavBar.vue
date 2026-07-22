@@ -27,7 +27,7 @@ const menuItems = ref<NavigationMenuItem[]>([
 
 const mobileMenuItems = ref<MenuItems[]>([
   { label: "Home", route: { name: "/" } },
-  { label: "Shop", route: { name: "/shop" } },
+  { label: "Shop", route: { name: "/shop/" } },
   { label: "About", route: { name: "/about" } },
   { label: "Contact", route: { name: "/contact" } },
   { label: "Reviews", route: { name: "/reviews" } },

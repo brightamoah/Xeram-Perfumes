@@ -18,12 +18,12 @@
 
       <UButton
         to="/"
-        variant="solid"
+        variant="subtle"
         color="neutral"
-        class="shadow-md px-6 py-3 rounded-full font-medium transition-all"
-      >
-        Back To Home
-      </UButton>
+        icon="i-lucide-house"
+        class="font-medium transition-all luxury-btn"
+        label="Back To Home"
+      />
     </div>
   </div>
 </template>

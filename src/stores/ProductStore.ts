@@ -254,9 +254,8 @@ export const useProductStore = defineStore("ProductStore", () => {
   const productById = computed(() => {
     return (id: number) => {
       const product = products.value.find(product => product.id === id);
-      console.log(`Product with ID ${id} found:`, product);
       if (!product) {
-        console.log(`Product with ID ${id} not found`);
+        throw new Error(`Product with ID ${id} not found`);
       }
       return product as Product;
     };
@@ -292,9 +291,6 @@ export const useProductStore = defineStore("ProductStore", () => {
       if (existingItemIndex !== -1) {
         // If item exists, only increment quantity without affecting cart count
         cartItems.value[existingItemIndex].quantity += quantity;
-        console.log(
-          `Increased quantity of ${product.name} (${variant.size}) to ${cartItems.value[existingItemIndex].quantity}`,
-        );
       }
       else {
         // If item doesn't exist, add it to cart (this will affect the cart count)
@@ -307,7 +303,6 @@ export const useProductStore = defineStore("ProductStore", () => {
           image: variant.image,
           quantity,
         });
-        console.log(`Added ${product.name} (${variant.size}) to cart`);
       }
     }
     catch (error: unknown) {

@@ -1,35 +1,35 @@
 <script setup lang="ts">
 import { useDateFormat, useNow, useWindowScroll } from "@vueuse/core";
-import { useRoute, useRouter } from "vue-router";
-import InstagramIcon from "@/components/icons/InstagramIcon.vue";
-import WhatsAPP from "@/components/icons/WhatsAPP.vue";
+import { useRouter } from "vue-router";
 import FaceBook from "@/components/icons/FaceBook.vue";
+import InstagramIcon from "@/components/icons/InstagramIcon.vue";
 import TwitterIcon from "@/components/icons/TwitterIcon.vue";
+import WhatsAPP from "@/components/icons/WhatsAPP.vue";
 
-const route = useRoute();
+// const route = useRoute();
 const router = useRouter();
 
 // Use VueUse for scrolling with smooth behavior
-const { y } = useWindowScroll({ behavior: 'smooth' });
+const { y } = useWindowScroll({ behavior: "smooth" });
 
 function scrollToTop() {
   y.value = 0;
 }
 
 function handleNav(e: Event, to: string) {
-  if (to.startsWith('/#')) {
+  if (to.startsWith("/#")) {
     e.preventDefault();
     const targetId = to.substring(2);
-    
+
     // Let Vue Router handle the URL and state update
-    router.push({ path: '/', hash: '#' + targetId }).then(() => {
+    router.push({ path: "/", hash: `#${targetId}` }).then(() => {
       // Short delay to ensure DOM is ready, especially if coming from another page
       setTimeout(() => {
         const el = document.getElementById(targetId);
         if (el) {
           // Calculate target position and offset by 100px for fixed navbar
           const top = el.getBoundingClientRect().top + window.scrollY - 100;
-          
+
           // Scroll using VueUse
           y.value = top;
         }
@@ -92,15 +92,18 @@ const socials = [
       </div>
 
       <!-- Nav links -->
-      <nav class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center mb-16 max-w-3xl mx-auto">
+      <nav class="gap-12 grid grid-cols-1 md:grid-cols-3 mx-auto mb-16 max-w-3xl text-center">
         <!-- Explore Group -->
         <div class="flex flex-col items-center gap-5">
-          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Explore</h4>
+          <h4 class="after:block relative after:bg-gold-500/50 after:mx-auto after:mt-3 mb-1 after:w-4 after:h-px font-medium text-[10px] text-gold-500 uppercase after:content-[''] tracking-[0.4em]">
+            Explore
+          </h4>
+
           <RouterLink
             v-for="link in exploreLinks"
             :key="link.label"
             :to="link.to"
-            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            class="inline-block font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link"
             @click="handleNav($event, link.to)"
           >
             {{ link.label }}
@@ -109,12 +112,15 @@ const socials = [
 
         <!-- Information Group -->
         <div class="flex flex-col items-center gap-5">
-          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Information</h4>
+          <h4 class="after:block relative after:bg-gold-500/50 after:mx-auto after:mt-3 mb-1 after:w-4 after:h-px font-medium text-[10px] text-gold-500 uppercase after:content-[''] tracking-[0.4em]">
+            Information
+          </h4>
+
           <RouterLink
             v-for="link in infoLinks"
             :key="link.label"
             :to="link.to"
-            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            class="inline-block font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link"
             @click="handleNav($event, link.to)"
           >
             {{ link.label }}
@@ -123,12 +129,15 @@ const socials = [
 
         <!-- Support Group -->
         <div class="flex flex-col items-center gap-5">
-          <h4 class="text-gold-500 text-[10px] uppercase tracking-[0.4em] font-medium mb-1 relative after:content-[''] after:block after:w-4 after:h-px after:bg-gold-500/50 after:mx-auto after:mt-3">Support</h4>
+          <h4 class="after:block relative after:bg-gold-500/50 after:mx-auto after:mt-3 mb-1 after:w-4 after:h-px font-medium text-[10px] text-gold-500 uppercase after:content-[''] tracking-[0.4em]">
+            Support
+          </h4>
+
           <RouterLink
             v-for="link in supportLinks"
             :key="link.label"
             :to="link.to"
-            class="font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link inline-block"
+            class="inline-block font-light text-ivory-500 hover:text-gold-500 text-xs uppercase tracking-[0.3em] transition-colors duration-300 footer-link"
             @click="handleNav($event, link.to)"
           >
             {{ link.label }}
@@ -146,7 +155,8 @@ const socials = [
         >
           <component
             :is="social.component"
-            :class="[social.iconClass, 'text-ivory-500 group-hover:text-gold-500 transition-colors duration-300']"
+            class="text-ivory-500 group-hover:text-gold-500 transition-colors duration-300"
+            :class="[social.iconClass]"
           />
         </a>
       </div>

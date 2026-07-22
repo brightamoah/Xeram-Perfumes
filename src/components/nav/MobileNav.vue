@@ -20,8 +20,8 @@ function toggleMobileMenu() {
 watch(
   () =>
     activeLink,
-  (newVal) => {
-    console.log(`Active link updated: ${newVal}`);
+  () => {
+    // console.log(`Active link updated: ${newVal}`);
   },
   {
     immediate: true,
@@ -45,7 +45,7 @@ watch(
       class="md:hidden top-full left-0 z-40 absolute bg-ivory-50 shadow-lg rounded-b-2xl w-full overflow-hidden"
     >
       <nav class="mx-auto container">
-        <ul class="flex flex-col divide-y divide-(--ui-border) rounded-lg">
+        <ul class="flex flex-col rounded-lg divide-y divide-default">
           <li
             v-for="item in menuItems"
             :key="item.label"

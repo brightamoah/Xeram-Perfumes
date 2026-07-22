@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { NavigationMenuItem } from "@nuxt/ui";
-import { computed, ref, onMounted, onUnmounted } from "vue";
-import { useProductStore } from "@/stores/ProductStore";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import { useProductStore } from "@/stores/ProductStore";
 
 const route = useRoute();
 const store = useProductStore();
@@ -45,11 +45,11 @@ const LUX_EASE = "ease-[cubic-bezier(0.16,1,0.3,1)]";
 
 <template>
   <!-- Fixed shell that handles the width transition via padding for flawlessly smooth resizing -->
-  <div 
-    class="top-0 z-50 fixed inset-x-0 flex justify-center transition-all duration-700 pointer-events-none"
+  <div
+    class="top-0 z-50 fixed inset-x-0 flex justify-center shadow-2xs transition-all duration-700 pointer-events-none"
     :class="[
       LUX_EASE,
-      isScrolled ? 'px-0 pt-0' : 'px-4 lg:px-[15%] pt-3 lg:pt-5'
+      isScrolled ? 'px-0 pt-0' : 'px-4 lg:px-[15%] pt-3 lg:pt-5',
     ]"
   >
     <UHeader
@@ -77,7 +77,7 @@ const LUX_EASE = "ease-[cubic-bezier(0.16,1,0.3,1)]";
       </template>
 
       <section
-        class="flex flex-shrink-0 justify-center items-center transition-transform duration-700"
+        class="flex justify-center items-center transition-transform duration-700 shrink-0"
         :class="[LUX_EASE, isScrolled ? 'scale-90' : 'scale-100']"
       >
         <LogoComponent />
@@ -120,7 +120,11 @@ const LUX_EASE = "ease-[cubic-bezier(0.16,1,0.3,1)]";
   </div>
 
   <!-- Spacer so page content doesn't sit under the now-fixed header (Hidden on homepage to prevent blank space above hero) -->
-  <div v-if="route.path !== '/'" aria-hidden="true" class="h-[76px] lg:h-[92px]" />
+  <div
+    v-if="route.path !== '/'"
+    aria-hidden="true"
+    class="h-19 lg:h-23"
+  />
 </template>
 
 <style scoped></style>

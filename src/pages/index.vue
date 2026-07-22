@@ -77,9 +77,9 @@ onUnmounted(() => {
       </div>
 
       <!-- Overlay gradients -->
-      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+      <div class="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-black/80" />
 
-      <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+      <div class="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/30" />
 
       <!-- Gold particle shimmer overlay -->
       <div class="absolute inset-0 pointer-events-none shimmer-overlay" />
@@ -147,7 +147,7 @@ onUnmounted(() => {
         :style="{ animationDelay: `${i * 0.15}s` }"
       >
         <!-- Image -->
-        <div class="w-full aspect-[3/4] overflow-hidden">
+        <div class="w-full aspect-3/4 overflow-hidden">
           <img
             decoding="async"
             loading="lazy"
@@ -185,13 +185,13 @@ onUnmounted(() => {
     </section>
 
     <!-- Section components -->
-    <WhyChooseUs id="why-choose"/>
+    <WhyChooseUs id="why-choose" />
 
-    <CollectionSection id="collection"/>
+    <CollectionSection id="collection" />
 
-    <DeliveryText id="delivery"/>
+    <DeliveryText id="delivery" />
 
-    <FAQ id="faq"/>
+    <FAQ id="faq" />
   </div>
 </template>
 

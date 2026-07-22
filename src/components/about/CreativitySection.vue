@@ -1,34 +1,25 @@
 <script setup lang="ts">
-import { useWindowSize } from "@vueuse/core";
-import { computed, watch } from "vue";
-
-const { width } = useWindowSize();
-
-const isMobile = computed(() => width.value < 768);
-
-watch(isMobile, (newValue) => {
-  console.log("Is mobile:", newValue);
-});
+// import { useWindowSize } from "@vueuse/core";
 </script>
 
 <template>
   <section class="w-full overflow-hidden">
     <!-- Desktop Version  -->
-    <div class="flex-start container mt-15 ml-10 hidden h-[30rem] max-w-7xl items-center px-6 py-16 md:flex">
-      <div class="w-1/2 pr-8">
+    <div class="hidden md:flex flex-start items-center mt-15 ml-10 px-6 py-16 max-w-7xl h-120 container">
+      <div class="pr-8 w-1/2">
         <img
           src="/img/about2.avif"
           alt="Xeram Perfumes Ingredients"
-          class="h-[25rem] w-full rounded-lg object-cover shadow-lg"
+          class="shadow-lg rounded-lg w-full h-100 object-cover"
         >
       </div>
 
-      <div class="w-1/2 pl-8">
-        <h1 class="mb-6 w-[70%] text-3xl leading-tight font-light">
+      <div class="pl-8 w-1/2">
+        <h1 class="mb-6 w-[85%] font-medium text-highlighted text-2xl md:text-3xl leading-tight tracking-wide">
           Where Modern Creativity Meets Timeless Cultural Heritage in Fragrance
         </h1>
 
-        <p class="mb-8 w-[85%] text-base">
+        <p class="mb-8 md:max-w-[85%] font-light text-base md:text-base">
           At Xeram Perfumes, we blend innovative artistry with the rich traditions of scent-making.
           Our luxurious fragrances are crafted to evoke deep emotional connections, celebrating both
           contemporary style and cultural richness.
@@ -37,9 +28,9 @@ watch(isMobile, (newValue) => {
     </div>
 
     <!-- Mobile Version  -->
-    <div class="container mx-auto mt-8 px-4 py-8 md:hidden">
+    <div class="md:hidden mx-auto mt-8 px-4 py-8 container">
       <div class="mb-6">
-        <h1 class="mb-4 w-[80%] text-2xl leading-tight font-medium">
+        <h1 class="mb-4 w-[80%] font-medium text-2xl leading-tight">
           Where Modern Creativity Meets Timeless Cultural Heritage in Fragrance
         </h1>
 
@@ -50,11 +41,11 @@ watch(isMobile, (newValue) => {
         </p>
       </div>
 
-      <div class="mt-4 overflow-hidden rounded-lg px-4 shadow-lg">
+      <div class="shadow-lg mt-4 px-4 rounded-lg overflow-hidden">
         <img
           src="/img/about2.avif"
           alt="Xeram Perfumes Ingredients"
-          class="h-90 w-full rounded-lg object-cover object-center transition-transform duration-300 hover:scale-105"
+          class="rounded-lg w-full h-90 object-center object-cover hover:scale-105 transition-transform duration-300"
         >
       </div>
     </div>

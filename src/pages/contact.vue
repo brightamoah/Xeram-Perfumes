@@ -17,7 +17,7 @@ async function handleSubmit() {
     errorMessage.value = "";
     successMessage.value = "";
     await new Promise(resolve => setTimeout(resolve, 2000));
-    console.table(formData.value);
+    // console.table(formData.value);
     successMessage.value = "Thank you. Your message has been received.";
     formData.value = { name: "", email: "", message: "" };
   }
@@ -41,31 +41,31 @@ async function handleSubmit() {
         class="absolute inset-0 opacity-40 w-full h-full object-cover hover:scale-105 transition-transform duration-[3s]"
       >
 
-      <div class="absolute inset-0 bg-gradient-to-r from-obsidian/90 via-obsidian/60 to-obsidian/30" />
+      <div class="absolute inset-0 bg-linear-to-r from-black/70 via-black/60 to-black/30" />
 
       <!-- Content over image -->
-      <div class="z-10 relative flex flex-col justify-between p-12 md:p-16 h-full min-h-[50vh] md:min-h-screen">
+      <div class="z-10 relative flex flex-col justify-between p-12 h-full min-h-[50vh] md:min-h-screen">
         <div>
-          <p class="mb-4 font-light text-[10px] text-gold-500 uppercase tracking-[0.5em]">
+          <p class="font-light text-gold-500 text-xs uppercase tracking-widest">
             Reach Out
           </p>
 
-          <h1 class="mb-6 font-display font-light text-ivory-50 text-4xl md:text-5xl lg:text-6xl leading-tight">
+          <h1 class="mb-4 font-display font-light text-ivory-50 text-4xl md:text-5xl lg:text-6xl leading-tight">
             Let's Connect
           </h1>
 
           <div class="mb-8 gold-divider" />
 
-          <p class="max-w-sm font-light text-ivory-500/80 text-sm leading-loose">
+          <p class="max-w-sm font-light text-neutral-300 text-sm leading-loose">
             Whether you're seeking your signature scent, a bespoke gift, or simply have a question — we're here.
           </p>
         </div>
 
-        <div class="space-y-6 mt-12">
+        <div class="space-y-4 mt-8">
           <div class="gold-divider-full" />
 
           <div class="pt-4">
-            <p class="mb-2 font-light text-[9px] text-gold-500 uppercase tracking-[0.4em]">
+            <p class="mb-2 font-light text-gold-500 text-xs uppercase tracking-[0.4em]">
               Location
             </p>
 
@@ -75,7 +75,7 @@ async function handleSubmit() {
           </div>
 
           <div>
-            <p class="mb-2 font-light text-[9px] text-gold-500 uppercase tracking-[0.4em]">
+            <p class="mb-2 font-light text-gold-500 text-xs uppercase tracking-[0.4em]">
               Contact
             </p>
 
@@ -89,7 +89,7 @@ async function handleSubmit() {
           </div>
 
           <div>
-            <p class="mb-2 font-light text-[9px] text-gold-500 uppercase tracking-[0.4em]">
+            <p class="mb-2 font-light text-gold-500 text-xs uppercase tracking-[0.4em]">
               Hours
             </p>
 
@@ -106,13 +106,13 @@ async function handleSubmit() {
     </div>
 
     <!-- RIGHT: Form panel -->
-    <div class="flex flex-col justify-center bg-ivory-900 px-10 md:px-16 py-16 md:py-24">
+    <div class="flex flex-col justify-center bg-ivory-900 px-10 md:px-16 py-10">
       <div class="mx-auto w-full max-w-md">
-        <p class="mb-4 font-light text-[10px] text-gold-500 uppercase tracking-[0.5em]">
+        <p class="mb-2 font-light text-[10px] text-gold-500 uppercase tracking-[0.5em]">
           Send a Message
         </p>
 
-        <h2 class="mb-8 font-display font-light text-ivory-50 text-3xl leading-tight">
+        <h2 class="mb-4 font-display font-light text-ivory-50 text-3xl leading-tight">
           We'd love to hear from you
         </h2>
 
@@ -161,7 +161,7 @@ async function handleSubmit() {
               v-model="formData.message"
               placeholder="Tell us how we can help..."
               required
-              rows="4"
+              rows="1"
               class="resize-none luxury-input"
             />
           </div>
@@ -210,7 +210,7 @@ async function handleSubmit() {
 
         <!-- Map -->
         <div
-          class="mt-14 border border-gold-500/15 overflow-hidden"
+          class="mx-auto mt-14 border w-full overflow-hidden"
           style="height: 240px;"
         >
           <iframe

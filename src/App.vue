@@ -4,23 +4,22 @@ import { useRoute } from "vue-router";
 
 const isLoaded = ref(false);
 
-const FooterComponentLazy = defineAsyncComponent({
-  loader: () => import("@/components/footer/FooterComponent.vue"),
-});
+// const FooterComponentLazy = defineAsyncComponent({
+//   loader: () => import("@/components/footer/FooterComponent.vue"),
+// });
 
 const route = useRoute();
 
 const layoutMap: Record<string, ReturnType<typeof defineAsyncComponent>> = {
-  default: defineAsyncComponent(() => import('./layouts/default.vue')),
+  default: defineAsyncComponent(() => import("./layouts/default.vue")),
   // dashboard: defineAsyncComponent(() => import('./layouts/dashboard.vue')),
-  auth: defineAsyncComponent(() => import('./layouts/auth.vue')),
-}
-
+  auth: defineAsyncComponent(() => import("./layouts/auth.vue")),
+};
 
 const layoutComponent = computed(() => {
-  const name = (route.meta.layout as string) ?? 'default'
-  return layoutMap[name] ?? layoutMap.default
-})
+  const name = (route.meta.layout as string) ?? "default";
+  return layoutMap[name] ?? layoutMap.default;
+});
 
 onMounted(() => {
   isLoaded.value = true;

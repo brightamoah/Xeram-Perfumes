@@ -6,39 +6,39 @@ const fragranceImage = ref<string>("/img/about3.png");
 </script>
 
 <template>
-  <section class="container mx-auto px-4 py-12 md:py-16">
-    <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+  <section class="mx-auto px-4 py-12 md:py-16 container">
+    <div class="flex md:flex-row flex-col items-center gap-8 md:gap-12">
       <!-- Text Section -->
-      <div class="w-full text-center md:w-1/2 md:text-left">
-        <h1 class="mb-4 text-left text-3xl leading-tight font-light text-(--ui-text-highlighted) md:text-3xl">
+      <div class="w-full md:w-1/2 md:text-left text-center">
+        <h1 class="mb-4 font-medium text-highlighted text-2xl md:text-3xl leading-tight tracking-wide">
           Crafting Luxury Fragrances with Unmatched Precision and Quality
         </h1>
 
-        <p class="mb-8 text-base leading-relaxed">
+        <p class="mb-8 font-light text-base leading-relaxed">
           At Xeram Perfumes, we believe that every scent tells a story. Our commitment to excellence
           is reflected in the meticulous attention to detail in every fragrance we create.
         </p>
 
         <!-- Features Section -->
-        <div class="grid grid-cols-1 gap-6 md:mt-15 md:grid-cols-2">
+        <div class="gap-6 grid grid-cols-1 md:grid-cols-2 md:mt-15">
           <!-- Quality Materials -->
           <div>
-            <h3 class="mb-2 text-lg font-medium text-(--ui-text-highlighted) md:text-xl">
+            <h3 class="mb-2 font-medium text-highlighted text-lg md:text-xl">
               Quality Materials
             </h3>
 
-            <p class="text-sm leading-relaxed md:text-base">
+            <p class="font-light text-sm md:text-base leading-relaxed">
               We source only the finest ingredients to ensure an exceptional olfactory experience.
             </p>
           </div>
 
           <!-- Artisan Craftsmanship -->
           <div>
-            <h3 class="mb-2 text-lg font-medium text-(--ui-text-highlighted) md:text-xl">
+            <h3 class="mb-2 font-medium text-highlighted text-lg md:text-xl">
               Artisan Craftsmanship
             </h3>
 
-            <p class="text-sm leading-relaxed md:text-base">
+            <p class="font-light text-sm md:text-base leading-relaxed">
               Our expert artisans pour their heart into each bottle, ensuring unmatched quality and
               elegance.
             </p>
@@ -48,11 +48,11 @@ const fragranceImage = ref<string>("/img/about3.png");
 
       <!-- Image Section -->
       <div class="w-full md:w-1/2">
-        <div class="aspect-auto overflow-hidden rounded-xl shadow-lg">
+        <div class="shadow-lg rounded-xl aspect-auto overflow-hidden">
           <img
             :src="fragranceImage"
             alt="Artisan fragrance crafting"
-            class="h-full w-full object-cover object-center transition-transform duration-300 hover:scale-105"
+            class="w-full h-full object-center object-cover hover:scale-105 transition-transform duration-300"
           >
         </div>
       </div>
@@ -82,10 +82,6 @@ img {
 @media (max-width: 768px) {
   .text-center {
     text-align: center;
-  }
-
-  .leading-tight {
-    line-height: 1.2;
   }
 
   .grid-cols-1 {
